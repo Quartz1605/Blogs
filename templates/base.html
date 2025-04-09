@@ -28,6 +28,18 @@
 
     </header>
 
+    {% if user.is_authenticated %}
+    <p>Hi '{{user.username}}'</p>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Logout</button>
+    </form>
+    {% else %}
+    <p>You are not logged in.</p>
+    <a href="{% url 'login' %}">Login from here.</a>
+    <p><a href="{% url 'signup' %}">Signup maybe ?</a></p>
+    {% endif %}
+
     <div>
       {% block content %}
       {% endblock content %}
